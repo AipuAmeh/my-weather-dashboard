@@ -4,3 +4,13 @@ header {
     padding: 5px;
     margin: 0;
 }
+
+h3 {
+    text-align: center;
+    position: relative;
+    top: 20rem;
+}
+
+/* li {
+    list-style-type: circle;
+} */
