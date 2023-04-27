@@ -31,21 +31,54 @@ ul li {
     list-style-type: none;
 }
 
+.search-engine {
+    margin: 20px;
+}
+
 .weather-features {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    /* border: solid black; */
-    width: 75%;
+    padding: 20px;
+    width: 50%;
     position: relative;
-    left: 20rem;
+    left: 25rem;
     bottom: 10rem;
 }
 
+#weather-box {
+    box-sizing: content-box;
+    border: solid black;
+    margin-left: 2rem;
+}
 .weather-features, 
 #city-name {
     display: inline;
-    text-align: center;
+}
+
+.forecast {
+    position: relative;
+    left: 13rem;
+    display: flex;
+    bottom: 5rem;
+}
+
+.each-container {
+    border: solid black;
+    margin: 10px;
+    position: relative;
+    right: 20rem;
+    padding: 20px;
+    background-color: #EDB05A;
+}
+
+.daily-features {
+    margin: 20px;
+}
+
+ul #weather-forecast {
+    border: solid black;
+    width: max-content;
 }
 
 button,
@@ -56,4 +89,19 @@ button,
 
 #weather-details {
     margin: 2rem;
+}
+
+#five-day-title {
+    position: relative;
+    top: -5rem;
+    
+}
+
+#weather-box {
+    box-sizing: content-box;
+    border: solid black;
+}
+
+#history-button {
+    background-color: #C2C2C2;
 }

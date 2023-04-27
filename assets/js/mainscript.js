@@ -1,11 +1,10 @@
 var apiKey = "485d8029f9463fb9427a7793559846d9";
-//user input concatenated into a string
+
 
 var search = document.getElementById("search");
 var date = new Date().toLocaleDateString();
 console.log(date);
-//render weather data at top of page
-//history list that saves to side of page
+
 function searchWeather(city) {
   var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -23,8 +22,7 @@ function searchWeather(city) {
     });
 }
 
-//when you click search the city is stored
-//displaying city info based off user input
+
 search.addEventListener("click", function (event) {
   event.preventDefault();
   var cityInput = document.getElementById("user-input").value;
@@ -37,20 +35,28 @@ search.addEventListener("click", function (event) {
 });
 
 function makeMainCard(data) {
-  //empty out the main Card
+ 
   var featuredWeather = document.querySelector(".weather-features");
-
-  var cityName = document.querySelector("#city-name");
+  featuredWeather.innerHTML = "";
+  featuredWeather.setAttribute("id", "weather-box");
+  var cityName = document.createElement("h2");
+  cityName.setAttribute("id", "city-name");
+ 
   cityName.textContent = data.name;
-  // var icon = data.weather[0].icon;
+  console.log(data.weather[0].icon);
+  featuredWeather.append(cityName);
+  var iconImage = document.createElement("img");
+  iconImage.setAttribute("src", "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png");
+  featuredWeather.append(iconImage);
+  
+
   console.log(data);
   featuredWeather.append(cityName);
   cityName.append(" " + date + " ");
-  var icon = document.getElementById("icon").src = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png";
-  console.log(icon);
+  console.log(iconImage);
 
-
-  var weatherDetails = document.querySelector("#weather-details");
+var weatherDetails = document.createElement("ul");
+weatherDetails.setAttribute("id", "weather-details")
   weatherDetails.innerHTML = "";
   var temp = document.createElement("li");
   temp.textContent = "Temp: " + data.main.temp + " \xB0" + "F";
@@ -72,7 +78,7 @@ function makeMainCard(data) {
 }
 
 function saveToStorage(newCity) {
-  //add it to my storage
+
   console.log("in my save to storage saving my : ", newCity);
   var history = JSON.parse(localStorage.getItem("cityInput"));
   if(history.includes(newCity)){
@@ -93,12 +99,13 @@ function loadStorage() {
   if (!history.length) {
     return;
   }
-  //where do I want my content to go
+
   var historyContainer = document.getElementById("history");
   historyContainer.innerHTML = "";
   for (let i = 0; i < history.length; i++) {
-    //make a button
+  
     var historyButton = document.createElement("button");
+    historyButton.setAttribute("id", "history-button");
     historyButton.innerHTML = history[i];
     historyButton.addEventListener("click", function (event) {
       searchWeather(event.target.innerHTML);
@@ -107,8 +114,7 @@ function loadStorage() {
     historyContainer.append(historyButton);
   }
 }
-//function for 5 day forecast
-//new api url to be called
+
 function fiveDayForecast(city) {
   var forecastURL =
     "https://api.openweathermap.org/data/2.5/forecast?q=" +
@@ -122,7 +128,7 @@ function fiveDayForecast(city) {
       console.log(forecast);
       return forecast.json();
     })
-    //get list of days as an array, features are objects
+  
     .then(function (forecastData) {
       var dailyForecast = forecastData.list;
       renderForecast(dailyForecast);
@@ -134,13 +140,12 @@ function fiveDayForecast(city) {
 
 
 
-    //where to append it to need date, icon, temp, wind, and humidity
-    //create what I want to ceate
-    //append it to the target element at the end
     
    
     var newSection = document.createElement("h2");
+    newSection.setAttribute("id", "five-day-title");
     var weatherForecast = document.querySelector("#weather-forecast");
+    weatherForecast.innerHTML = "";
     var title = "Five Day Forecast: ";
     newSection.append(title);
     weatherForecast.append(newSection);
@@ -149,14 +154,16 @@ function fiveDayForecast(city) {
         console.log(dailyForecast[i]);
 
         var weatherContainer = document.createElement("div");
+        weatherContainer.setAttribute("class", "each-container")
             var newDate = dailyForecast[i].dt_txt;
-                weatherContainer.append(dayjs(newDate).format("MM/DD/YYYY"));
+            var iconImage = document.createElement("img")
+            iconImage.setAttribute("src","https://openweathermap.org/img/wn/" + dailyForecast[i].weather[0].icon + "@2x.png")
+            weatherContainer.append(iconImage);
+            weatherContainer.append(dayjs(newDate).format("MM/DD/YYYY"));
         
-            // var icons = document.getElementById("forecast-icons").src = "https://openweathermap.org/img/wn/" + dailyForecast[i].weather[0].icon + "@2x.png";
-            // console.log(dailyForecast[i].weather[0].icon);
-            // weatherContainer.append(icons);
-            // weatherForecast.append(weatherContainer);
-//icons and styling
+            
+            weatherForecast.append(weatherContainer);
+
         var dailyFeatures = document.createElement("ul");
 
             var newTemp = document.createElement("li");
@@ -177,7 +184,7 @@ function fiveDayForecast(city) {
             weatherContainer.append(dailyFeatures);
             weatherForecast.append(weatherContainer);
 
-            //how to show icons
+           
     }
   
     
