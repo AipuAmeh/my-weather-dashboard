@@ -3,7 +3,7 @@ var apiKey = "485d8029f9463fb9427a7793559846d9";
 
 var search = document.getElementById("search");
 var date = new Date().toLocaleDateString();
-console.log(date);
+
 
 function searchWeather(city) {
   var queryURL =
@@ -14,7 +14,7 @@ function searchWeather(city) {
     apiKey;
   fetch(queryURL, { method: "GET" })
     .then(function (response) {
-      console.log(response);
+   
       return response.json();
     })
     .then(function (data) {
@@ -43,17 +43,15 @@ function makeMainCard(data) {
   cityName.setAttribute("id", "city-name");
  
   cityName.textContent = data.name;
-  console.log(data.weather[0].icon);
+
   featuredWeather.append(cityName);
   var iconImage = document.createElement("img");
   iconImage.setAttribute("src", "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png");
   featuredWeather.append(iconImage);
   
-
-  console.log(data);
   featuredWeather.append(cityName);
   cityName.append(" " + date + " ");
-  console.log(iconImage);
+ 
 
 var weatherDetails = document.createElement("ul");
 weatherDetails.setAttribute("id", "weather-details")
@@ -72,14 +70,12 @@ weatherDetails.setAttribute("id", "weather-details")
   wind.textContent = "Wind: " + data.wind.speed + " MPH";
   weatherDetails.append(wind);
   featuredWeather.append(weatherDetails);
-  console.log("city to be saving")
-  console.log(data.name)
+
   saveToStorage(data.name);
 }
 
 function saveToStorage(newCity) {
 
-  console.log("in my save to storage saving my : ", newCity);
   var history = JSON.parse(localStorage.getItem("cityInput"));
   if(history.includes(newCity)){
     return
@@ -89,9 +85,9 @@ function saveToStorage(newCity) {
 }
 
 function loadStorage() {
-  console.log("loading my storage");
+
   var history = JSON.parse(localStorage.getItem("cityInput"));
-  console.log(history);
+ 
   if (!history) {
     localStorage.setItem("cityInput", JSON.stringify([]));
     return;
@@ -125,7 +121,7 @@ function fiveDayForecast(city) {
 
   fetch(forecastURL, { method: "GET" })
     .then(function (forecast) {
-      console.log(forecast);
+   
       return forecast.json();
     })
   
@@ -135,13 +131,7 @@ function fiveDayForecast(city) {
     });
 
   function renderForecast(dailyForecast) {
-    console.log("in my render forecast");
-    console.log(dailyForecast);
-
-
-
-    
-   
+  
     var newSection = document.createElement("h2");
     newSection.setAttribute("id", "five-day-title");
     var weatherForecast = document.querySelector("#weather-forecast");
@@ -156,11 +146,12 @@ function fiveDayForecast(city) {
         var weatherContainer = document.createElement("div");
         weatherContainer.setAttribute("class", "each-container")
             var newDate = dailyForecast[i].dt_txt;
+           
             var iconImage = document.createElement("img")
             iconImage.setAttribute("src","https://openweathermap.org/img/wn/" + dailyForecast[i].weather[0].icon + "@2x.png")
             weatherContainer.append(iconImage);
             weatherContainer.append(dayjs(newDate).format("MM/DD/YYYY"));
-        
+            
             
             weatherForecast.append(weatherContainer);
 
