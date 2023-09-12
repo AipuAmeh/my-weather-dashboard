@@ -6,7 +6,7 @@ This assignment utilized a combination of everything we have learned thus far in
 
 ## Installation
 
-Link: https://aipuameh.github.io/my-weather-dashboard/
+[Link to Deployed Site](https://aipuameh.github.io/my-weather-dashboard/)
 <img width="1439" alt="Screenshot 2023-04-27 at 11 26 10 PM" src="https://user-images.githubusercontent.com/110988589/235047408-4a2157f1-0b69-4284-ba4c-3e0300c144cd.png">
 
 ## Usage
